@@ -1,291 +1,297 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Genbody America</title>
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="images/favicon.png" />
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    
-    <!-- Custome CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Password Protected Page</title>
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #dialogText {
+            color: white;
+            background-color: #333333;
+        }
+        
+        #dialogWrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: table;
+            background-color: #EEEEEE;
+        }
+        
+        #dialogWrapCell {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        #mainDialog {
+            max-width: 400px;
+            margin: 5px;
+            border: solid #AAAAAA 1px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 5px 3px #AAAAAA;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #FFFFFF;
+            overflow: hidden;
+            text-align: left;
+        }
+        #mainDialog > * {
+            padding: 10px 30px;
+        }
+        #passArea {
+            padding: 20px 30px;
+            background-color: white;
+        }
+        #passArea > * {
+            margin: 5px auto;
+        }
+        #pass {
+            width: 100%;
+            height: 40px;
+            font-size: 30px;
+        }
+        
+        #messageWrapper {
+            float: left;
+            vertical-align: middle;
+            line-height: 30px;
+        }
+        
+        .notifyText {
+            display: none;
+        }
+        
+        #invalidPass {
+            color: red;
+        }
+        
+        #success {
+            color: green;
+        }
+        
+        #submitPass {
+            font-size: 20px;
+            border-radius: 5px;
+            background-color: #E7E7E7;
+            border: solid gray 1px;
+            float: right;
+            cursor: pointer;
+        }
+        #contentFrame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #attribution {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        #attribution, #attribution a {
+            color: #999;
+        }
+        .error {
+            display: none;
+            color: red;
+        }
+    </style>
   </head>
   <body>
-   
-   <!--Header Start -->
-
-	<header class="site_header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-          <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="index.html"><img style="max-width=20%;" src="images/Logo.png" alt="logo"/></a>
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item nav_btn">
-               
-              </li>
-            </ul>
-          </nav>
-        </div>
-			</div>
-		</div>
-  </header>
-  
-<!--Hero Area Start -->
- <div class="d-flex justify-content-center align-items-center w-100"><div class="snackbar" id="toast"></div></div>
-<section class="hero_area">
-  <div class="hero_image">
-    <img src="images/hero_right.png" alt="img"/>
-  </div>
-  <div class="hero_mob_image">
-    <img src="images/genbody_1.png" alt="img"/>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="hero_content">
-          <h2>The GenBody <br/> COVID-19 Ag test is now EUA Authorized. </h2>
-          <p>
-            The US FDA granted Emergency Use Authorization to GenBody's COVID-19 Ag point-of-care antigen test for SARS-CoV-2 infection. The rapid diagnostic test is intended for the qualitative detection of nucleocapsid protein antigen from SARS-CoV-2 in direct nasopharyngeal (NP) or anterior nasal (AN) swab specimens.
-          </p>
-        <div class="modal_fda_list">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="modal_fda_list_item">
-                  <a href="https://www.fda.gov/media/150785/download" target="_blank">
-                    <img src="images/icons/pdf-2.svg" alt="icon"/>
-                    <span>Authorization Letter</span>
-                  </a>
+    <iframe id="contentFrame" frameBorder="0" allowfullscreen></iframe>
+    <div id="dialogWrap">
+        <div id="dialogWrapCell">
+            <div id="mainDialog">
+                <div id="dialogText">This page is password protected.</div>
+                <div id="passArea">
+                    <p id="passwordPrompt">Password</p>
+                    <input id="pass" type="password" name="pass" autofocus>
+                    <div>
+                        <span id="messageWrapper">
+                            <span id="invalidPass" class="error">Sorry, please try again.</span>
+                            <span id="trycatcherror" class="error">Sorry, something went wrong.</span>
+                            <span id="success" class="notifyText">Success!</span>
+                            &nbsp;
+                        </span>
+                        <button id="submitPass" type="button">Submit</button>
+                        <div style="clear: both;"></div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="modal_fda_list_item">
-                  <a href="https://www.fda.gov/media/150788/download" target="_blank">
-                    <img src="images/icons/pdf-2.svg" alt="icon"/>
-                    <span>IFU</span>
-                  </a>
+                <div id="securecontext" class="error">
+                    <p>
+                        Sorry, but password protection only works over a secure connection. Please load this page via HTTPS.
+                    </p>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="modal_fda_list_item">
-                  <a href="https://www.fda.gov/media/150786/download" target="_blank">
-                    <img src="images/icons/pdf-2.svg" alt="icon"/>
-                    <span>Fact Sheet for HCP</span>
-                  </a>
+                <div id="nocrypto" class="error">
+                    <p>
+                        Your web browser appears to be outdated. Please visit this page using a modern browser.
+                    </p>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="modal_fda_list_item">
-                  <a href="https://www.fda.gov/media/150787/download" target="_blank">
-                    <img src="images/icons/pdf-2.svg" alt="icon"/>
-                    <span>Fact Sheet for Patients</span>
-                  </a>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-</section>
-   
     
-<!--Area Start -->
+    <script>
+    (function() {
 
-    
-<!--Genbody News Area Start -->
+        var pl = "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";
+        
+        var submitPass = document.getElementById('submitPass');
+        var passEl = document.getElementById('pass');
+        var invalidPassEl = document.getElementById('invalidPass');
+        var trycatcherror = document.getElementById('trycatcherror');
+        var successEl = document.getElementById('success');
+        var contentFrame = document.getElementById('contentFrame');
+        
+        // Sanity checks
 
-    
-<!--manufactured Area Start -->
+        if (pl === "") {
+            submitPass.disabled = true;
+            passEl.disabled = true;
+            alert("This page is meant to be used with the encryption tool. It doesn't work standalone.");
+            return;
+        }
 
- <div class="container">
-    <div class="row">
-      
-        <div class="col-md-12">
-        <div class="manufactured_txt">
-          
-		  <p style="font-size:10px; line-height:normal;">
-		  The GenBody COVID-19 Ag test has not been FDA cleared or approved, but has been authorized by FDA under an EUA for use by authorized laboratories.
+        if (!isSecureContext) {
+            document.querySelector("#passArea").style.display = "none";
+            document.querySelector("#securecontext").style.display = "block";
+            return;
+        }
 
-The product has been authorized only for the detection of proteins from SARS-CoV-2, not for any other viruses or pathogens; and, the emergency use of this product is only authorized for the duration of the declaration that circumstances exist justifying the authorization of emergency use of in vitro diagnostics for detection and/or diagnosis of COVID-19 under Section 564(b)(1) of the Federal Food, Drug and Cosmetic Act, 21 U.S.C. § 360bbb-3(b)(1), unless the declaration is terminated or authorization is revoked sooner.
-		  <p>
-        </div>
-      </div>
-    </div>
-  </div>
-<!--Team Area Start -->
+        if (!crypto.subtle) {
+            document.querySelector("#passArea").style.display = "none";
+            document.querySelector("#nocrypto").style.display = "block";
+            return;
+        }
+        
+        function str2ab(str) {
+            var ustr = atob(str);
+            var buf = new ArrayBuffer(ustr.length);
+            var bufView = new Uint8Array(buf);
+            for (var i=0, strLen=ustr.length; i < strLen; i++) {
+                bufView[i] = ustr.charCodeAt(i);
+            }
+            return bufView;
+        }
 
-    
+        async function deriveKey(salt, password) {
+            const encoder = new TextEncoder()
+            const baseKey = await crypto.subtle.importKey(
+                'raw',
+                encoder.encode(password),
+                'PBKDF2',
+                false,
+                ['deriveKey'],
+            )
+            return await crypto.subtle.deriveKey(
+                { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+                baseKey,
+                { name: 'AES-GCM', length: 256 },
+                true,
+                ['decrypt'],
+            )
+        }
+        
+        async function doSubmit(evt) {
+            submitPass.disabled = true;
+            passEl.disabled = true;
 
-<!--Contact Area Start -->
+            let iv, ciphertext, key;
+            
+            try {
+                var unencodedPl = str2ab(pl);
 
-<section class="contact_area">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <div>
-          <div class="contact_txt">
-            <h2>Contact us</h2>
-            <p>
-              For questions, or to report a problem, please call
-              <br/>
-              Technical Support at <span>(888) 552-5204</span>
-            </p>
-            <div class="contact_down_txt">
-              <p>(Available Hours: Mon. to Fri.: 9 a.m. – 5 p.m. PST)</p>
-            </div>
-            <p>Or <span>ts@genbodyamerica.com</span></p>
-          </div>
-          <div class="d-flex justify-content-start contact_map">
-           <a target="_blank" href="https://www.google.com/maps/place/Kwell+Laboratories/@34.0241269,-117.5925956,12z/data=!4m16!1m10!4m9!1m1!4e2!1m6!1m2!1s0x80dcb549911560a7:0xf048b32b20f1f12c!2skwell+labs!2m2!1d-117.5225555!2d34.0241468!3m4!1s0x80dcb549911560a7:0xf048b32b20f1f12c!8m2!3d34.0241468!4d-117.5225555"> <img src="images/map.png" alt="img"> </a>
-            <p>
-              GenBody America <br/>
-              3420 De Forest Circle<br/>
-              Jurupa Valley, CA 91752, USA
-            </p>
-          </div>
-        </div>
+                const salt = unencodedPl.slice(0, 32)
+                iv = unencodedPl.slice(32, 32 + 16)
+                ciphertext = unencodedPl.slice(32 + 16)
 
+                key = await deriveKey(salt, passEl.value);
+            } catch (e) {
+                trycatcherror.style.display = "inline";
+                console.error(e);
+                return;
+            }
 
+            try {
+                const decryptedArray = new Uint8Array(
+                    await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext)
+                );
 
-      </div>
-      <div class="col-md-6">
-        <div class="contact_form">
-          <form id="contat-data" action="javascript:saveContactData()">
-            <div class="form-group">
-              <input type="email" id="email" name="Email" class="form-control envelop_icon" required="required" placeholder="Enter your email">
-            </div>
-            <div class="form-group">
-              <textarea class="form-control" required="required" name="Message" id="message"  rows="3" placeholder="Type Your message…"></textarea>
-            </div>
-            <div class="submit_btn">
-              <button type="submit" class="btn btn-primary">Send </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+                let decrypted = new TextDecoder().decode(decryptedArray);
 
-<!--Footer Area Start -->
+                if (decrypted === "") throw "No data returned";
 
-<footer class="site_footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <p>Copyright © 2021 GenBody America, LLC.  All rights reserved.</p>
-      </div>
-    </div>
-  </div>
-</footer>
+                const basestr = '<base href="." target="_top">';
+                const anchorfixstr = `
+                    <script>
+                        Array.from(document.links).forEach((anchor) => {
+                            const href = anchor.getAttribute("href");
+                            if (href.startsWith("#")) {
+                                anchor.addEventListener("click", function(e) {
+                                    e.preventDefault();
+                                    const targetId = this.getAttribute("href").substring(1);
+                                    const targetEl = document.getElementById(targetId);
+                                    targetEl.scrollIntoView();
+                                });
+                            }
+                        });
+                    <\/script>
+                `;
+                
+                // Set default iframe link targets to _top so all links break out of the iframe
+                if (decrypted.includes("<head>")) decrypted = decrypted.replace("<head>", "<head>" + basestr);
+                else if (decrypted.includes("<!DOCTYPE html>")) decrypted = decrypted.replace("<!DOCTYPE html>", "<!DOCTYPE html>" + basestr);
+                else decrypted = basestr + decrypted;
 
-
-
-
-
-
-
-
-
-<!-- Modal-1 Area -->
-
-
-<div class="modal fade modal_main" id="modal_1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal_dialog_620">
-    <div class="modal-content">
-      <div class="modal-body product_modal_body">
-        <div class="modal_close_btn">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-            <img src="images/icons/close.svg"/>
-          </button>
-        </div>
-      <form>
-        <div class="modal_area">
-          <h3>Product Documentation</h3>
-          <p>
-            The GenBody COVID-19 Ag test is FDA EUA authorized.
-            <br/>
-            Refer to the links below. 
-          </p>
-          
-          <div class="modal_fda_list">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="modal_fda_list_item">
-                  <a href="https://www.fda.gov/media/150785/download" target="_blank">
-                    <img src="images/icons/pdf-2.svg" alt="icon"/>
-                    <span>Authorization Letter</span>
-                  </a>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="modal_fda_list_item">
-                  <a href="https://www.fda.gov/media/150788/download" target="_blank">
-                    <img src="images/icons/pdf-2.svg" alt="icon"/>
-                    <span>IFU</span>
-                  </a>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="modal_fda_list_item">
-                  <a href="https://www.fda.gov/media/150786/download" target="_blank">
-                    <img src="images/icons/pdf-2.svg" alt="icon"/>
-                    <span>Fact Sheet for HCP</span>
-                  </a>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="modal_fda_list_item">
-                  <a href="https://www.fda.gov/media/150787/download" target="_blank">
-                    <img src="images/icons/pdf-2.svg" alt="icon"/>
-                    <span>Fact Sheet for Patients</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-            <div class="madal_next_btn">
-              <button data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal_2" type="button" class="btn nxt_btn_1"><span>Purchase</span></button>
-            </div>
-        </div>
-      </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Modal-2 Area -->
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Optional JavaScript -->
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JavaScript -->
-    <script src="js/custom.js"></script>
-    <script src="js/custome-select.js"></script>
-    <script src="js/form-handlers.js"  ></script>
-    
-    
+                // Fix fragment links
+                if (decrypted.includes("</body>")) decrypted = decrypted.replace("</body>", anchorfixstr + '</body>');
+                else if (decrypted.includes("</html>")) decrypted = decrypted.replace("</html>", anchorfixstr + '</html>');
+                else decrypted = decrypted + anchorfixstr;
+                
+                contentFrame.srcdoc = decrypted;
+                
+                successEl.style.display = "inline";
+                setTimeout(function() {
+                    dialogWrap.style.display = "none";
+                }, 1000);
+            } catch (e) {
+                invalidPassEl.style.display = "inline";
+                passEl.value = "";
+                submitPass.disabled = false;
+                passEl.disabled = false;
+                console.error(e);
+                return;
+            }
+        }
+        
+        submitPass.onclick = doSubmit;
+        passEl.onkeypress = function(e){
+            if (!e) e = window.event;
+            var keyCode = e.keyCode || e.which;
+            invalidPassEl.style.display = "none";
+            if (keyCode == '13'){
+              // Enter pressed
+              doSubmit();
+              return false;
+            }
+        }
+    })();
+    </script>
   </body>
 </html>
